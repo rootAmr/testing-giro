@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP Parallax Hero</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #202529;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background: #e9007f;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle, transparent 35%, rgba(0, 0, 0, .25) 36%),
+                linear-gradient(rgba(0, 0, 0, .15), rgba(0, 0, 0, .15));
+            background-size: 4px 4px, 100% 100%;
+            mix-blend-mode: multiply;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        .nav {
+            position: absolute;
+            top: 24px;
+            left: 40px;
+            right: 40px;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-weight: 900;
+        }
+
+        .logo-small {
+            font-size: 28px;
+            text-shadow: 4px 4px 0 #000;
+        }
+
+        .social {
+            display: flex;
+            gap: 18px;
+        }
+
+        .social span {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            background: #000;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+
+        .layer {
+            position: absolute;
+            inset: 0;
+            width: 110%;
+            height: 110%;
+            object-fit: cover;
+            left: -5%;
+            top: -5%;
+            will-change: transform;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .bg {
+            background:
+                url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1600&auto=format&fit=crop") center/cover;
+            filter: grayscale(1) contrast(1.4);
+            opacity: .5;
+            mix-blend-mode: multiply;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            background: #111;
+            color: #ff4ab3;
+            border: 8px solid #ff4ab3;
+            box-shadow: 10px 10px 0 #111;
+            font-weight: 900;
+            text-transform: uppercase;
+            z-index: 5;
+        }
+
+        .shape-1 {
+            left: 10%;
+            top: 22%;
+            font-size: 70px;
+            padding: 10px 30px;
+            transform: rotate(-6deg);
+            border-radius: 18px;
+        }
+
+        .shape-2 {
+            right: 12%;
+            top: 18%;
+            font-size: 34px;
+            padding: 22px;
+            width: 250px;
+            height: 210px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            transform: rotate(8deg);
+        }
+
+        .person {
+            position: absolute;
+            width: 230px;
+            height: 420px;
+            background: #080808;
+            border-radius: 45% 45% 8% 8%;
+            z-index: 7;
+            opacity: .9;
+            box-shadow: inset 0 0 0 8px rgba(255, 255, 255, .08);
+        }
+
+        .person::before {
+            content: "";
+            position: absolute;
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            background: #111;
+            top: -48px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid #ff4ab3;
+        }
+
+        .p1 {
+            left: 6%;
+            bottom: 8%;
+            transform: rotate(-12deg);
+        }
+
+        .p2 {
+            left: 42%;
+            top: 6%;
+            transform: rotate(7deg);
+        }
+
+        .p3 {
+            right: 7%;
+            bottom: 2%;
+            transform: rotate(12deg);
+        }
+
+        .center-logo {
+            position: absolute;
+            z-index: 30;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            color: white;
+            font-size: clamp(56px, 10vw, 150px);
+            font-weight: 1000;
+            letter-spacing: -8px;
+            text-shadow: 10px 10px 0 rgba(0, 0, 0, .65);
+        }
+
+        .program {
+            min-height: 60vh;
+            padding: 90px 8%;
+            color: white;
+            background: #202529;
+        }
+
+        .program h2 {
+            display: inline-block;
+            font-size: 76px;
+            font-weight: 1000;
+            text-shadow:
+                5px 5px 0 #000,
+                -3px -3px 0 #000;
+            margin-bottom: 40px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .card {
+            height: 210px;
+            background: #333;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card::after {
+            content: "Program";
+            position: absolute;
+            left: 20px;
+            bottom: 18px;
+            font-size: 28px;
+            font-weight: 900;
+            text-shadow: 3px 3px 0 #000;
+        }
+
+        @media (max-width: 768px) {
+            .shape-1 {
+                font-size: 42px;
+                left: 5%;
+            }
+
+            .shape-2 {
+                width: 190px;
+                height: 150px;
+                font-size: 24px;
+                right: 5%;
+            }
+
+            .person {
+                width: 150px;
+                height: 300px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="hero" id="hero">
+        <div class="nav">
+            <div class="logo-small">▲ VINDES.</div>
+            <div class="social">
+                <span>X</span>
+                <span>T</span>
+                <span>IG</span>
+                <span>YT</span>
+            </div>
+        </div>
+
+        <div class="layer bg" data-depth="10"></div>
+
+        <div class="shape shape-1 layer-item" data-depth="35">JASIMAN</div>
+        <div class="shape shape-2 layer-item" data-depth="45">NGAPAIN<br>BANG?</div>
+
+        <div class="person p1 layer-item" data-depth="20"></div>
+        <div class="person p2 layer-item" data-depth="55"></div>
+        <div class="person p3 layer-item" data-depth="30"></div>
+
+        <div class="center-logo layer-item" data-depth="12">
+            VINDES.
+        </div>
+    </section>
+
+    <section class="program">
+        <h2>Program</h2>
+
+        <div class="cards">
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+
+    <script>
+        const hero = document.querySelector("#hero");
+        const items = document.querySelectorAll(".layer-item, .bg");
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        hero.addEventListener("mousemove", (e) => {
+            const rect = hero.getBoundingClientRect();
+
+            mouseX = (e.clientX - rect.left) / rect.width - 0.5;
+            mouseY = (e.clientY - rect.top) / rect.height - 0.5;
+
+            items.forEach((item) => {
+                const depth = Number(item.dataset.depth || 20);
+
+                gsap.to(item, {
+                    x: mouseX * depth,
+                    y: mouseY * depth,
+                    rotation: mouseX * depth * 0.08,
+                    duration: 0.8,
+                    ease: "power3.out"
+                });
+            });
+        });
+
+        hero.addEventListener("mouseleave", () => {
+            items.forEach((item) => {
+                gsap.to(item, {
+                    x: 0,
+                    y: 0,
+                    rotation: 0,
+                    duration: 1,
+                    ease: "elastic.out(1, 0.5)"
+                });
+            });
+        });
+
+        gsap.from(".center-logo", {
+            scale: 0.7,
+            opacity: 0,
+            duration: 1,
+            ease: "back.out(1.7)"
+        });
+
+        gsap.from(".shape, .person", {
+            y: 80,
+            opacity: 0,
+            stagger: 0.12,
+            duration: 1,
+            ease: "power4.out"
+        });
+    </script>
+
+</body>
+
+</html>
