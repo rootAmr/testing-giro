@@ -4,16 +4,79 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vindes Style GSAP Parallax</title>
+
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    html,body{width:100%;min-height:100%;background:#202529;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
-    .nav{position:fixed;top:0;left:0;right:0;height:76px;z-index:100;background:#0a0a0a;display:flex;align-items:center;justify-content:space-between;padding:0 38px;color:white}
-    .menu{font-size:28px;font-weight:900}.nav-logo{height:34px}.nav-links{display:flex;gap:28px;font-weight:900;font-size:14px}.nav-links span{cursor:pointer}
-    .hero{position:relative;height:100vh;min-height:680px;background:#ec1685;overflow:hidden;touch-action:none;padding-top:76px}
-    .scene{position:absolute;inset:76px 0 0;overflow:hidden;perspective:900px;background:#ec1685}
-    .scene:after{content:"";position:absolute;inset:0;z-index:90;pointer-events:none;background:radial-gradient(circle,rgba(0,0,0,.3) 1px,transparent 1.6px);background-size:3px 3px;mix-blend-mode:multiply;opacity:.55}
-    .layer{position:absolute;display:block;user-select:none;pointer-events:none;will-change:transform;transform-style:preserve-3d}
-    .bg{inset:-8%;width:116%;height:116%;object-fit:cover;z-index:1;opacity:1}
+    html,body{
+      width:100%;
+      min-height:100%;
+      background:#202529;
+      font-family:Arial,Helvetica,sans-serif;
+      overflow-x:hidden;
+    }
+
+    .nav{
+      position:fixed;
+      top:0;left:0;right:0;
+      height:76px;
+      z-index:1000;
+      background:#0a0a0a;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 38px;
+      color:white;
+    }
+
+    .menu{font-size:28px;font-weight:900}
+    .nav-logo{height:34px}
+    .nav-links{
+      display:flex;
+      gap:28px;
+      font-weight:900;
+      font-size:14px;
+    }
+
+    .hero{
+      position:relative;
+      height:100svh;
+      min-height:680px;
+      background:#ec1685;
+      overflow:hidden;
+      touch-action:none;
+      padding-top:76px;
+    }
+
+    .scene{
+      position:absolute;
+      inset:76px 0 0;
+      overflow:hidden;
+      perspective:900px;
+      background:#ec1685;
+    }
+
+    .scene:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:90;
+      pointer-events:none;
+      background:radial-gradient(circle,rgba(0,0,0,.3) 1px,transparent 1.6px);
+      background-size:3px 3px;
+      mix-blend-mode:multiply;
+      opacity:.55;
+    }
+
+    .layer{
+      position:absolute;
+      display:block;
+      user-select:none;
+      pointer-events:none;
+      will-change:transform;
+      transform-style:preserve-3d;
+    }
+
+    .bg{inset:-8%;width:116%;height:116%;object-fit:cover;z-index:1}
     .foreground{left:-6%;bottom:-8%;width:112%;z-index:18}
     .vincent{left:9%;bottom:4%;width:min(38vw,520px);z-index:25}
     .desta{right:2%;top:2%;width:min(34vw,470px);z-index:22}
@@ -24,18 +87,239 @@
     .c2{right:32%;top:10%;width:min(12vw,170px);z-index:33}
     .merch{left:30%;top:9%;width:min(13vw,190px);z-index:33}
     .vd{left:31%;bottom:14%;width:min(17vw,230px);z-index:33}
-    .logo-main{left:50%;top:50%;width:min(42vw,560px);z-index:60;transform:translate(-50%,-50%)}
-    .gyro-btn{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:999;border:0;border-radius:999px;background:white;color:#111;padding:13px 20px;font-weight:900;box-shadow:0 12px 30px rgba(0,0,0,.35);display:none}
-    .program{background:#202529;min-height:70vh;padding:90px 7%;color:white;position:relative}.program:before{content:"";position:absolute;top:-80px;left:0;right:0;height:120px;background:#202529}.program-title{width:min(520px,82vw);filter:drop-shadow(8px 8px 0 #000);position:relative;z-index:2}.cards{margin-top:42px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.card{height:230px;border-radius:18px;background:#111;overflow:hidden;position:relative}.card img{width:100%;height:100%;object-fit:cover;opacity:.75}.card span{position:absolute;left:20px;bottom:18px;color:white;font-size:28px;font-weight:900;text-shadow:4px 4px 0 #000}
-    @media(max-width:768px){.nav{height:58px;padding:0 16px}.nav-logo{height:28px}.nav-links{display:none}.hero{min-height:620px;padding-top:58px}.scene{inset:58px 0 0}.bg{width:230%;height:112%;left:-65%;top:-6%;object-fit:cover}.foreground{width:230%;left:-62%;bottom:-4%}.vincent{width:58vw;left:-8%;bottom:11%}.desta{width:58vw;right:-14%;top:10%}.jasiman{width:32vw;left:13%;top:16%}.ngapain{width:30vw;right:7%;top:19%}.v2u{width:22vw;left:9%;bottom:34%}.art{width:22vw;right:5%;bottom:33%}.c2{width:22vw;right:23%;top:9%}.merch{width:24vw;left:22%;top:7%}.vd{width:32vw;left:35%;bottom:19%}.logo-main{width:48vw}.gyro-btn{display:block}.cards{grid-template-columns:1fr}.program{padding-top:80px}}
+    .logo-main{
+      left:50%;
+      top:50%;
+      width:min(42vw,560px);
+      z-index:60;
+      transform:translate(-50%,-50%);
+    }
+
+    .gyro-btn{
+      position:fixed;
+      left:50%;
+      bottom:20px;
+      transform:translateX(-50%);
+      z-index:2000;
+      border:0;
+      border-radius:999px;
+      background:white;
+      color:#111;
+      padding:13px 20px;
+      font-weight:900;
+      box-shadow:0 12px 30px rgba(0,0,0,.35);
+      display:none;
+    }
+
+    .program{
+      background:#202529;
+      min-height:70vh;
+      padding:90px 7%;
+      color:white;
+      position:relative;
+    }
+
+    .program-title{
+      width:min(520px,82vw);
+      filter:drop-shadow(8px 8px 0 #000);
+      position:relative;
+      z-index:2;
+    }
+
+    .cards{
+      margin-top:42px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
+    }
+
+    .card{
+      height:230px;
+      border-radius:18px;
+      background:#111;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:.75;
+    }
+
+    .card span{
+      position:absolute;
+      left:20px;
+      bottom:18px;
+      color:white;
+      font-size:28px;
+      font-weight:900;
+      text-shadow:4px 4px 0 #000;
+    }
+
+    @media(max-width:768px){
+      .nav{
+        height:58px;
+        padding:0 16px;
+      }
+
+      .nav-logo{height:26px}
+      .nav-links{display:none}
+      .menu{font-size:24px}
+
+      .hero{
+        height:100svh;
+        min-height:620px;
+        padding-top:58px;
+      }
+
+      .scene{
+        inset:58px 0 0;
+      }
+
+      .bg{
+        width:230%;
+        height:115%;
+        left:-65%;
+        top:-7%;
+        object-fit:cover;
+      }
+
+      .foreground{
+        width:230%;
+        left:-65%;
+        bottom:-4%;
+      }
+
+      .vincent{
+        width:62vw;
+        left:-12%;
+        bottom:10%;
+      }
+
+      .desta{
+        width:62vw;
+        right:-18%;
+        top:12%;
+      }
+
+      .jasiman{
+        width:34vw;
+        left:10%;
+        top:16%;
+      }
+
+      .ngapain{
+        width:32vw;
+        right:6%;
+        top:20%;
+      }
+
+      .v2u{
+        width:23vw;
+        left:8%;
+        bottom:36%;
+      }
+
+      .art{
+        width:24vw;
+        right:5%;
+        bottom:34%;
+      }
+
+      .c2{
+        width:22vw;
+        right:24%;
+        top:9%;
+      }
+
+      .merch{
+        width:25vw;
+        left:21%;
+        top:7%;
+      }
+
+      .vd{
+        width:34vw;
+        left:34%;
+        bottom:20%;
+      }
+
+      .logo-main{
+        width:54vw;
+        top:52%;
+      }
+
+      .gyro-btn{
+        display:block;
+        bottom:16px;
+        padding:12px 18px;
+        font-size:13px;
+      }
+
+      .program{
+        padding:70px 18px;
+      }
+
+      .program-title{
+        width:82vw;
+      }
+
+      .cards{
+        grid-template-columns:1fr;
+        gap:18px;
+      }
+
+      .card{
+        height:210px;
+      }
+    }
+
+    @media(max-width:420px){
+      .hero{
+        min-height:600px;
+      }
+
+      .logo-main{
+        width:58vw;
+      }
+
+      .vincent{
+        width:68vw;
+        left:-18%;
+      }
+
+      .desta{
+        width:68vw;
+        right:-24%;
+      }
+
+      .foreground{
+        width:250%;
+        left:-75%;
+      }
+
+      .bg{
+        width:250%;
+        left:-75%;
+      }
+    }
   </style>
 </head>
+
 <body>
   <button class="gyro-btn" id="gyroBtn">Aktifkan Gyro</button>
+
   <nav class="nav">
     <div class="menu">☰</div>
     <img src="fg_logo.png" class="nav-logo" alt="Vindes">
-    <div class="nav-links"><span>PROGRAM</span><span>ART</span><span>STORE</span><span>EVENT</span></div>
+    <div class="nav-links">
+      <span>PROGRAM</span>
+      <span>ART</span>
+      <span>STORE</span>
+      <span>EVENT</span>
+    </div>
   </nav>
 
   <section class="hero">
@@ -57,6 +341,7 @@
 
   <section class="program">
     <img src="fg_logo.png" class="program-title" alt="Vindes">
+
     <div class="cards">
       <div class="card"><img src="bgweb-art-1.jpg" alt=""><span>Art</span></div>
       <div class="card"><img src="bgfooter.jpg" alt=""><span>Store</span></div>
@@ -69,17 +354,23 @@
     const scene = document.querySelector('#scene');
     const items = document.querySelectorAll('.parallax');
     const gyroBtn = document.querySelector('#gyroBtn');
+
     let pointerActive = false;
     let gyroActive = false;
-    let cx = 0, cy = 0;
+    let cx = 0;
+    let cy = 0;
 
-    function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+    function clamp(v, min, max) {
+      return Math.max(min, Math.min(max, v));
+    }
 
-    function moveLayers(x, y){
+    function moveLayers(x, y) {
       cx += (x - cx) * 0.12;
       cy += (y - cy) * 0.12;
+
       items.forEach((item) => {
         const depth = Number(item.dataset.depth || 20);
+
         gsap.to(item, {
           x: cx * depth,
           y: cy * depth,
@@ -91,55 +382,93 @@
       });
     }
 
+    function handleGyro(e) {
+      if (!gyroActive) return;
+
+      const gamma = e.gamma || 0;
+      const beta = e.beta || 0;
+
+      const x = clamp(gamma / 28, -1, 1);
+      const y = clamp((beta - 35) / 35, -1, 1);
+
+      moveLayers(x, y);
+    }
+
+    async function enableGyro() {
+      try {
+        if (
+          typeof DeviceOrientationEvent !== 'undefined' &&
+          typeof DeviceOrientationEvent.requestPermission === 'function'
+        ) {
+          const permission = await DeviceOrientationEvent.requestPermission();
+
+          if (permission !== 'granted') {
+            gyroBtn.style.display = 'block';
+            return;
+          }
+        }
+
+        gyroActive = true;
+        pointerActive = false;
+        gyroBtn.style.display = 'none';
+
+        window.removeEventListener('deviceorientation', handleGyro, true);
+        window.addEventListener('deviceorientation', handleGyro, true);
+      } catch (err) {
+        gyroBtn.style.display = 'block';
+      }
+    }
+
     scene.addEventListener('mousemove', (e) => {
+      if (gyroActive) return;
+
       pointerActive = true;
       const r = scene.getBoundingClientRect();
       const x = ((e.clientX - r.left) / r.width - 0.5) * 2;
       const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
+
       moveLayers(x, y);
     });
 
-    scene.addEventListener('mouseleave', () => pointerActive = false);
+    scene.addEventListener('mouseleave', () => {
+      pointerActive = false;
+    });
 
     scene.addEventListener('touchmove', (e) => {
+      if (gyroActive) return;
+
       pointerActive = true;
       const t = e.touches[0];
       const r = scene.getBoundingClientRect();
       const x = ((t.clientX - r.left) / r.width - 0.5) * 2;
       const y = ((t.clientY - r.top) / r.height - 0.5) * 2;
-      moveLayers(x, y);
-    }, {passive:true});
 
-    function handleGyro(e){
-      if(!gyroActive) return;
-      const gamma = e.gamma || 0;
-      const beta = e.beta || 0;
-      const x = clamp(gamma / 28, -1, 1);
-      const y = clamp((beta - 35) / 35, -1, 1);
       moveLayers(x, y);
-    }
+    }, { passive: true });
 
-    async function enableGyro(){
-      try{
-        if(typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
-          const permission = await DeviceOrientationEvent.requestPermission();
-          if(permission !== 'granted') return;
-        }
-        gyroActive = true;
-        pointerActive = false;
-        window.addEventListener('deviceorientation', handleGyro, true);
-        gyroBtn.style.display = 'none';
-      }catch(err){ alert('Gyro tidak bisa diaktifkan di browser ini.'); }
-    }
     gyroBtn.addEventListener('click', enableGyro);
 
-    gsap.ticker.add(() => {
-      if(pointerActive || gyroActive) return;
-      const t = Date.now() * 0.001;
-      moveLayers(Math.sin(t * .75) * .32, Math.cos(t * .55) * .22);
+    window.addEventListener('load', () => {
+      enableGyro();
     });
 
-    gsap.from('.layer', {opacity:0, scale:.96, duration:1, stagger:.04, ease:'power3.out'});
+    gsap.ticker.add(() => {
+      if (pointerActive || gyroActive) return;
+
+      const t = Date.now() * 0.001;
+      moveLayers(
+        Math.sin(t * 0.75) * 0.32,
+        Math.cos(t * 0.55) * 0.22
+      );
+    });
+
+    gsap.from('.layer', {
+      opacity: 0,
+      scale: 0.96,
+      duration: 1,
+      stagger: 0.04,
+      ease: 'power3.out'
+    });
   </script>
 </body>
 </html>
