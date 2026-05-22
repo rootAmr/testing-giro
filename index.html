@@ -3,419 +3,143 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vindes Style Parallax</title>
-
+  <title>Vindes Style GSAP Parallax</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: #20252a;
-      font-family: Arial, sans-serif;
-      overflow-x: hidden;
-    }
-
-    .hero {
-      position: relative;
-      height: 100vh;
-      min-height: 640px;
-      overflow: hidden;
-      background: #e92a8b;
-      touch-action: none;
-    }
-
-    .nav {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 74px;
-      z-index: 50;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 42px;
-      color: #fff;
-    }
-
-    .brand {
-      font-size: 28px;
-      font-weight: 1000;
-      text-shadow: 3px 3px 0 #e92a8b;
-    }
-
-    .social {
-      display: flex;
-      gap: 30px;
-      font-weight: 900;
-    }
-
-    .scene {
-      position: absolute;
-      inset: 74px 0 0;
-      overflow: hidden;
-    }
-
-    .scene::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 40;
-      pointer-events: none;
-      background:
-        radial-gradient(circle, rgba(0,0,0,.2) 1px, transparent 1.5px),
-        linear-gradient(rgba(233,42,139,.42), rgba(233,42,139,.42));
-      background-size: 4px 4px, 100% 100%;
-      mix-blend-mode: multiply;
-    }
-
-    .layer {
-      position: absolute;
-      will-change: transform;
-      user-select: none;
-      pointer-events: none;
-    }
-
-    .bg-collage {
-      inset: -8%;
-      z-index: 1;
-      background:
-        url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1600&auto=format&fit=crop") center/cover;
-      filter: grayscale(1) contrast(1.35);
-      opacity: .85;
-    }
-
-    .sticker {
-      background: #111;
-      color: #f04ca0;
-      border: 8px solid #111;
-      box-shadow: 0 0 0 4px #f04ca0;
-      font-weight: 1000;
-      text-transform: uppercase;
-      line-height: .9;
-      text-align: center;
-    }
-
-    .jasiman {
-      left: 13%;
-      top: 12%;
-      z-index: 12;
-      font-size: clamp(48px, 8vw, 105px);
-      padding: 14px 24px;
-      transform: rotate(-8deg);
-      text-shadow: 4px 4px 0 #000;
-    }
-
-    .ngapain {
-      right: 12%;
-      top: 12%;
-      z-index: 13;
-      width: 230px;
-      height: 190px;
-      display: grid;
-      place-items: center;
-      font-size: 34px;
-      transform: rotate(8deg);
-    }
-
-    .person {
-      width: 210px;
-      height: 370px;
-      border-radius: 48% 48% 12% 12%;
-      background: #070707;
-      z-index: 10;
-      opacity: .9;
-      box-shadow: inset 0 0 0 10px rgba(255,255,255,.08);
-    }
-
-    .person::before {
-      content: "";
-      position: absolute;
-      top: -50px;
-      left: 50%;
-      width: 95px;
-      height: 95px;
-      transform: translateX(-50%);
-      border-radius: 50%;
-      background: #090909;
-      box-shadow: 0 0 0 8px #f04ca0;
-    }
-
-    .p1 { left: 5%; bottom: 16%; transform: rotate(-15deg); }
-    .p2 { left: 38%; top: 0; transform: rotate(8deg); }
-    .p3 { right: 5%; bottom: 4%; transform: rotate(15deg); }
-
-    .logo-main {
-      position: absolute;
-      inset: 0;
-      z-index: 30;
-      display: grid;
-      place-items: center;
-      color: #fff;
-      font-size: clamp(64px, 12vw, 150px);
-      font-weight: 1000;
-      letter-spacing: -8px;
-      text-shadow: 8px 8px 0 rgba(0,0,0,.45);
-    }
-
-    .logo-mark {
-      display: inline-block;
-      width: .8em;
-      height: .55em;
-      background: #fff;
-      border-radius: 70% 10% 10% 10%;
-      margin-right: .12em;
-      transform: skewX(-16deg);
-    }
-
-    .noise-bottom {
-      left: -5%;
-      bottom: -10%;
-      width: 110%;
-      height: 32%;
-      z-index: 18;
-      background: #111;
-      clip-path: polygon(0 40%, 12% 35%, 22% 52%, 35% 30%, 48% 48%, 60% 32%, 76% 55%, 89% 36%, 100% 45%, 100% 100%, 0 100%);
-      opacity: .95;
-    }
-
-    .gyro-btn {
-      position: fixed;
-      left: 50%;
-      bottom: 20px;
-      transform: translateX(-50%);
-      z-index: 999;
-      display: none;
-      border: 0;
-      padding: 14px 22px;
-      border-radius: 999px;
-      background: #fff;
-      color: #111;
-      font-weight: 1000;
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
-    }
-
-    .program {
-      min-height: 80vh;
-      background: #20252a;
-      padding: 90px 7%;
-      color: white;
-    }
-
-    .program h2 {
-      font-size: clamp(54px, 8vw, 92px);
-      font-weight: 1000;
-      text-shadow: 6px 6px 0 #000;
-      margin-bottom: 40px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 26px;
-    }
-
-    .card {
-      height: 230px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #333, #111);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::after {
-      content: "Program";
-      position: absolute;
-      left: 20px;
-      bottom: 20px;
-      font-size: 28px;
-      font-weight: 900;
-      text-shadow: 4px 4px 0 #000;
-    }
-
-    @media (max-width: 768px) {
-      .hero { min-height: 580px; }
-      .nav { padding: 0 22px; height: 64px; }
-      .brand { font-size: 22px; }
-      .social { gap: 14px; font-size: 13px; }
-      .scene { inset: 64px 0 0; }
-
-      .jasiman { left: 8%; top: 14%; }
-      .ngapain { right: 5%; width: 160px; height: 140px; font-size: 24px; }
-
-      .person { width: 140px; height: 260px; }
-      .p1 { left: -4%; bottom: 20%; }
-      .p2 { left: 38%; top: 4%; }
-      .p3 { right: -5%; bottom: 8%; }
-
-      .logo-main { letter-spacing: -4px; }
-      .gyro-btn { display: block; }
-      .cards { grid-template-columns: 1fr; }
-    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{width:100%;min-height:100%;background:#202529;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
+    .nav{position:fixed;top:0;left:0;right:0;height:76px;z-index:100;background:#0a0a0a;display:flex;align-items:center;justify-content:space-between;padding:0 38px;color:white}
+    .menu{font-size:28px;font-weight:900}.nav-logo{height:34px}.nav-links{display:flex;gap:28px;font-weight:900;font-size:14px}.nav-links span{cursor:pointer}
+    .hero{position:relative;height:100vh;min-height:680px;background:#ec1685;overflow:hidden;touch-action:none;padding-top:76px}
+    .scene{position:absolute;inset:76px 0 0;overflow:hidden;perspective:900px;background:#ec1685}
+    .scene:after{content:"";position:absolute;inset:0;z-index:90;pointer-events:none;background:radial-gradient(circle,rgba(0,0,0,.3) 1px,transparent 1.6px);background-size:3px 3px;mix-blend-mode:multiply;opacity:.55}
+    .layer{position:absolute;display:block;user-select:none;pointer-events:none;will-change:transform;transform-style:preserve-3d}
+    .bg{inset:-8%;width:116%;height:116%;object-fit:cover;z-index:1;opacity:1}
+    .foreground{left:-6%;bottom:-8%;width:112%;z-index:18}
+    .vincent{left:9%;bottom:4%;width:min(38vw,520px);z-index:25}
+    .desta{right:2%;top:2%;width:min(34vw,470px);z-index:22}
+    .jasiman{left:7%;top:12%;width:min(20vw,270px);z-index:35}
+    .ngapain{right:13%;top:15%;width:min(17vw,230px);z-index:34}
+    .v2u{left:6%;bottom:28%;width:min(12vw,170px);z-index:33}
+    .art{right:8%;bottom:26%;width:min(13vw,180px);z-index:33}
+    .c2{right:32%;top:10%;width:min(12vw,170px);z-index:33}
+    .merch{left:30%;top:9%;width:min(13vw,190px);z-index:33}
+    .vd{left:31%;bottom:14%;width:min(17vw,230px);z-index:33}
+    .logo-main{left:50%;top:50%;width:min(42vw,560px);z-index:60;transform:translate(-50%,-50%)}
+    .gyro-btn{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:999;border:0;border-radius:999px;background:white;color:#111;padding:13px 20px;font-weight:900;box-shadow:0 12px 30px rgba(0,0,0,.35);display:none}
+    .program{background:#202529;min-height:70vh;padding:90px 7%;color:white;position:relative}.program:before{content:"";position:absolute;top:-80px;left:0;right:0;height:120px;background:#202529}.program-title{width:min(520px,82vw);filter:drop-shadow(8px 8px 0 #000);position:relative;z-index:2}.cards{margin-top:42px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.card{height:230px;border-radius:18px;background:#111;overflow:hidden;position:relative}.card img{width:100%;height:100%;object-fit:cover;opacity:.75}.card span{position:absolute;left:20px;bottom:18px;color:white;font-size:28px;font-weight:900;text-shadow:4px 4px 0 #000}
+    @media(max-width:768px){.nav{height:58px;padding:0 16px}.nav-logo{height:28px}.nav-links{display:none}.hero{min-height:620px;padding-top:58px}.scene{inset:58px 0 0}.bg{width:230%;height:112%;left:-65%;top:-6%;object-fit:cover}.foreground{width:230%;left:-62%;bottom:-4%}.vincent{width:58vw;left:-8%;bottom:11%}.desta{width:58vw;right:-14%;top:10%}.jasiman{width:32vw;left:13%;top:16%}.ngapain{width:30vw;right:7%;top:19%}.v2u{width:22vw;left:9%;bottom:34%}.art{width:22vw;right:5%;bottom:33%}.c2{width:22vw;right:23%;top:9%}.merch{width:24vw;left:22%;top:7%}.vd{width:32vw;left:35%;bottom:19%}.logo-main{width:48vw}.gyro-btn{display:block}.cards{grid-template-columns:1fr}.program{padding-top:80px}}
   </style>
 </head>
-
 <body>
-
   <button class="gyro-btn" id="gyroBtn">Aktifkan Gyro</button>
+  <nav class="nav">
+    <div class="menu">☰</div>
+    <img src="fg_logo.png" class="nav-logo" alt="Vindes">
+    <div class="nav-links"><span>PROGRAM</span><span>ART</span><span>STORE</span><span>EVENT</span></div>
+  </nav>
 
-  <section class="hero" id="hero">
-    <nav class="nav">
-      <div class="brand">△VINDES.</div>
-      <div class="social">
-        <span>X</span>
-        <span>TT</span>
-        <span>IG</span>
-        <span>YT</span>
-      </div>
-    </nav>
-
+  <section class="hero">
     <div class="scene" id="scene">
-      <div class="layer bg-collage parallax" data-depth="10"></div>
-
-      <div class="layer sticker jasiman parallax" data-depth="42">JASIMAN</div>
-      <div class="layer sticker ngapain parallax" data-depth="58">NGAPAIN<br>BANG?</div>
-
-      <div class="layer person p1 parallax" data-depth="30"></div>
-      <div class="layer person p2 parallax" data-depth="46"></div>
-      <div class="layer person p3 parallax" data-depth="38"></div>
-
-      <div class="layer noise-bottom parallax" data-depth="24"></div>
-
-      <div class="logo-main parallax" data-depth="16">
-        <div><span class="logo-mark"></span>VINDES.</div>
-      </div>
+      <img src="bg_parallax.jpg" class="layer bg parallax" data-depth="10" alt="">
+      <img src="foreground1.png" class="layer foreground parallax" data-depth="26" alt="">
+      <img src="vincent.png" class="layer vincent parallax" data-depth="42" alt="">
+      <img src="desta.png" class="layer desta parallax" data-depth="48" alt="">
+      <img src="fg_jasiman.png" class="layer jasiman parallax" data-depth="62" alt="">
+      <img src="ngapain.png" class="layer ngapain parallax" data-depth="58" alt="">
+      <img src="fg_vindes_2u.png" class="layer v2u parallax" data-depth="38" alt="">
+      <img src="fg_vindes_art.png" class="layer art parallax" data-depth="44" alt="">
+      <img src="fg_vindes_c2.png" class="layer c2 parallax" data-depth="50" alt="">
+      <img src="fg_vindes_merch.png" class="layer merch parallax" data-depth="46" alt="">
+      <img src="fg_vindes.png" class="layer vd parallax" data-depth="40" alt="">
+      <img src="fg_logo.png" class="layer logo-main parallax" data-depth="18" alt="Vindes">
     </div>
   </section>
 
   <section class="program">
-    <h2>Program</h2>
+    <img src="fg_logo.png" class="program-title" alt="Vindes">
     <div class="cards">
-      <div class="card"></div>
-      <div class="card"></div>
-      <div class="card"></div>
+      <div class="card"><img src="bgweb-art-1.jpg" alt=""><span>Art</span></div>
+      <div class="card"><img src="bgfooter.jpg" alt=""><span>Store</span></div>
+      <div class="card"><img src="bg_parallax.jpg" alt=""><span>Program</span></div>
     </div>
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-
   <script>
-    const scene = document.querySelector("#scene");
-    const items = document.querySelectorAll(".parallax");
-    const gyroBtn = document.querySelector("#gyroBtn");
-
+    const scene = document.querySelector('#scene');
+    const items = document.querySelectorAll('.parallax');
+    const gyroBtn = document.querySelector('#gyroBtn');
     let pointerActive = false;
     let gyroActive = false;
-    let lastX = 0;
-    let lastY = 0;
+    let cx = 0, cy = 0;
 
-    function clamp(value, min, max) {
-      return Math.max(min, Math.min(max, value));
-    }
+    function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
 
-    function moveLayers(x, y) {
-      lastX += (x - lastX) * 0.12;
-      lastY += (y - lastY) * 0.12;
-
+    function moveLayers(x, y){
+      cx += (x - cx) * 0.12;
+      cy += (y - cy) * 0.12;
       items.forEach((item) => {
         const depth = Number(item.dataset.depth || 20);
-
         gsap.to(item, {
-          x: lastX * depth,
-          y: lastY * depth,
-          rotation: lastX * depth * 0.055,
+          x: cx * depth,
+          y: cy * depth,
+          rotation: cx * depth * 0.035,
           duration: 0.45,
-          ease: "power3.out",
-          overwrite: "auto"
+          ease: 'power3.out',
+          overwrite: 'auto'
         });
       });
     }
 
-    scene.addEventListener("mousemove", (e) => {
+    scene.addEventListener('mousemove', (e) => {
       pointerActive = true;
-
-      const rect = scene.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-
+      const r = scene.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width - 0.5) * 2;
+      const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
       moveLayers(x, y);
     });
 
-    scene.addEventListener("mouseleave", () => {
-      pointerActive = false;
-    });
+    scene.addEventListener('mouseleave', () => pointerActive = false);
 
-    scene.addEventListener("touchmove", (e) => {
+    scene.addEventListener('touchmove', (e) => {
       pointerActive = true;
-
-      const touch = e.touches[0];
-      const rect = scene.getBoundingClientRect();
-      const x = ((touch.clientX - rect.left) / rect.width - 0.5) * 2;
-      const y = ((touch.clientY - rect.top) / rect.height - 0.5) * 2;
-
+      const t = e.touches[0];
+      const r = scene.getBoundingClientRect();
+      const x = ((t.clientX - r.left) / r.width - 0.5) * 2;
+      const y = ((t.clientY - r.top) / r.height - 0.5) * 2;
       moveLayers(x, y);
-    }, { passive: true });
+    }, {passive:true});
 
-    function handleGyro(event) {
-      if (!gyroActive) return;
-
-      const gamma = event.gamma || 0;
-      const beta = event.beta || 0;
-
+    function handleGyro(e){
+      if(!gyroActive) return;
+      const gamma = e.gamma || 0;
+      const beta = e.beta || 0;
       const x = clamp(gamma / 28, -1, 1);
       const y = clamp((beta - 35) / 35, -1, 1);
-
       moveLayers(x, y);
     }
 
-    function startGyro() {
-      gyroActive = true;
-      pointerActive = false;
-      window.addEventListener("deviceorientation", handleGyro, true);
-      gyroBtn.style.display = "none";
-    }
-
-    gyroBtn.addEventListener("click", async () => {
-      try {
-        if (
-          typeof DeviceOrientationEvent !== "undefined" &&
-          typeof DeviceOrientationEvent.requestPermission === "function"
-        ) {
+    async function enableGyro(){
+      try{
+        if(typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
           const permission = await DeviceOrientationEvent.requestPermission();
-          if (permission === "granted") startGyro();
-        } else {
-          startGyro();
+          if(permission !== 'granted') return;
         }
-      } catch (err) {
-        alert("Gyro tidak bisa diaktifkan di browser ini.");
-      }
-    });
+        gyroActive = true;
+        pointerActive = false;
+        window.addEventListener('deviceorientation', handleGyro, true);
+        gyroBtn.style.display = 'none';
+      }catch(err){ alert('Gyro tidak bisa diaktifkan di browser ini.'); }
+    }
+    gyroBtn.addEventListener('click', enableGyro);
 
     gsap.ticker.add(() => {
-      if (pointerActive || gyroActive) return;
-
+      if(pointerActive || gyroActive) return;
       const t = Date.now() * 0.001;
-      const x = Math.sin(t * 0.8) * 0.35;
-      const y = Math.cos(t * 0.6) * 0.22;
-
-      moveLayers(x, y);
+      moveLayers(Math.sin(t * .75) * .32, Math.cos(t * .55) * .22);
     });
 
-    gsap.from(".logo-main", {
-      scale: 0.72,
-      opacity: 0,
-      duration: 1,
-      ease: "back.out(1.7)"
-    });
-
-    gsap.from(".sticker, .person, .noise-bottom", {
-      y: 90,
-      opacity: 0,
-      stagger: 0.08,
-      duration: 1,
-      ease: "power4.out"
-    });
+    gsap.from('.layer', {opacity:0, scale:.96, duration:1, stagger:.04, ease:'power3.out'});
   </script>
-
 </body>
 </html>
