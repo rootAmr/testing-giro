@@ -9,7 +9,7 @@
     html,body{width:100%;min-height:100%;background:#202529;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
     .nav{position:fixed;top:0;left:0;right:0;height:76px;z-index:100;background:#0a0a0a;display:flex;align-items:center;justify-content:space-between;padding:0 38px;color:white}
     .menu{font-size:28px;font-weight:900}.nav-logo{height:34px}.nav-links{display:flex;gap:28px;font-weight:900;font-size:14px}.nav-links span{cursor:pointer}
-    .hero{position:relative;height:100vh;min-height:680px;background:#ec1685;overflow:hidden;touch-action:none;padding-top:76px}
+    .hero{position:relative;height:100svh;min-height:640px;background:#ec1685;overflow:hidden;touch-action:pan-y;padding-top:76px}
     .scene{position:absolute;inset:76px 0 0;overflow:hidden;perspective:900px;background:#ec1685}
     .scene:after{content:"";position:absolute;inset:0;z-index:90;pointer-events:none;background:radial-gradient(circle,rgba(0,0,0,.3) 1px,transparent 1.6px);background-size:3px 3px;mix-blend-mode:multiply;opacity:.55}
     .layer{position:absolute;display:block;user-select:none;pointer-events:none;will-change:transform;transform-style:preserve-3d}
@@ -26,12 +26,14 @@
     .vd{left:31%;bottom:14%;width:min(17vw,230px);z-index:33}
     .logo-main{left:50%;top:50%;width:min(42vw,560px);z-index:60;transform:translate(-50%,-50%)}
     .gyro-btn{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:999;border:0;border-radius:999px;background:white;color:#111;padding:13px 20px;font-weight:900;box-shadow:0 12px 30px rgba(0,0,0,.35);display:none}
-    .program{background:#202529;min-height:70vh;padding:90px 7%;color:white;position:relative}.program:before{content:"";position:absolute;top:-80px;left:0;right:0;height:120px;background:#202529}.program-title{width:min(520px,82vw);filter:drop-shadow(8px 8px 0 #000);position:relative;z-index:2}.cards{margin-top:42px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.card{height:230px;border-radius:18px;background:#111;overflow:hidden;position:relative}.card img{width:100%;height:100%;object-fit:cover;opacity:.75}.card span{position:absolute;left:20px;bottom:18px;color:white;font-size:28px;font-weight:900;text-shadow:4px 4px 0 #000}
-    @media(max-width:768px){.nav{height:58px;padding:0 16px}.nav-logo{height:28px}.nav-links{display:none}.hero{min-height:620px;padding-top:58px}.scene{inset:58px 0 0}.bg{width:230%;height:112%;left:-65%;top:-6%;object-fit:cover}.foreground{width:230%;left:-62%;bottom:-4%}.vincent{width:58vw;left:-8%;bottom:11%}.desta{width:58vw;right:-14%;top:10%}.jasiman{width:32vw;left:13%;top:16%}.ngapain{width:30vw;right:7%;top:19%}.v2u{width:22vw;left:9%;bottom:34%}.art{width:22vw;right:5%;bottom:33%}.c2{width:22vw;right:23%;top:9%}.merch{width:24vw;left:22%;top:7%}.vd{width:32vw;left:35%;bottom:19%}.logo-main{width:48vw}.gyro-btn{display:block}.cards{grid-template-columns:1fr}.program{padding-top:80px}}
+    .program{background:#202529;min-height:70vh;padding:90px max(20px,7vw);color:white;position:relative}.program:before{content:"";position:absolute;top:-80px;left:0;right:0;height:120px;background:#202529}.program-title{width:min(520px,82vw);filter:drop-shadow(8px 8px 0 #000);position:relative;z-index:2}.cards{margin-top:42px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.card{height:clamp(180px,18vw,230px);border-radius:8px;background:#111;overflow:hidden;position:relative}.card img{width:100%;height:100%;object-fit:cover;opacity:.75}.card span{position:absolute;left:20px;bottom:18px;color:white;font-size:clamp(22px,3vw,28px);font-weight:900;text-shadow:4px 4px 0 #000}
+    @media(max-width:1024px){.nav{padding:0 24px}.nav-links{gap:18px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.card:last-child{grid-column:1/-1}}
+    @media(max-width:768px){.nav{height:58px;padding:0 16px}.menu{font-size:24px}.nav-logo{height:28px}.nav-links{display:none}.hero{height:100svh;min-height:560px;padding-top:58px}.scene{inset:58px 0 0}.bg{width:230%;height:112%;left:-65%;top:-6%;object-fit:cover}.foreground{width:230%;left:-62%;bottom:-4%}.vincent{width:min(64vw,330px);left:-10%;bottom:10%}.desta{width:min(62vw,320px);right:-17%;top:10%}.jasiman{width:min(34vw,160px);left:13%;top:16%}.ngapain{width:min(32vw,150px);right:7%;top:19%}.v2u{width:min(24vw,120px);left:9%;bottom:34%}.art{width:min(24vw,120px);right:5%;bottom:33%}.c2{width:min(24vw,120px);right:23%;top:9%}.merch{width:min(26vw,130px);left:22%;top:7%}.vd{width:min(34vw,170px);left:35%;bottom:19%}.logo-main{width:min(58vw,280px)}.cards{grid-template-columns:1fr}.card:last-child{grid-column:auto}.program{padding-top:80px}.program:before{top:-54px;height:82px}}
+    @media(max-width:420px){.hero{min-height:520px}.bg{width:250%;left:-75%}.foreground{width:250%;left:-73%;bottom:-2%}.vincent{width:70vw;left:-18%;bottom:9%}.desta{width:68vw;right:-24%;top:12%}.logo-main{width:64vw}.vd{left:34%;bottom:18%}.card{height:190px}}
   </style>
 </head>
 <body>
-  <button class="gyro-btn" id="gyroBtn">Aktifkan Gyro</button>
+  <button class="gyro-btn" id="gyroBtn" type="button">Aktifkan Gyro</button>
   <nav class="nav">
     <div class="menu">☰</div>
     <img src="fg_logo.png" class="nav-logo" alt="Vindes">
@@ -119,6 +121,12 @@
       moveLayers(x, y);
     }
 
+    function showGyroButton(){
+      if(window.matchMedia('(pointer: coarse)').matches){
+        gyroBtn.style.display = 'block';
+      }
+    }
+
     async function enableGyro(){
       try{
         if(typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
@@ -133,6 +141,20 @@
     }
     gyroBtn.addEventListener('click', enableGyro);
 
+    function autoEnableGyro(){
+      if(typeof DeviceOrientationEvent === 'undefined') return;
+
+      if(typeof DeviceOrientationEvent.requestPermission === 'function'){
+        showGyroButton();
+        return;
+      }
+
+      gyroActive = true;
+      pointerActive = false;
+      window.addEventListener('deviceorientation', handleGyro, true);
+      gyroBtn.style.display = 'none';
+    }
+
     gsap.ticker.add(() => {
       if(pointerActive || gyroActive) return;
       const t = Date.now() * 0.001;
@@ -140,6 +162,7 @@
     });
 
     gsap.from('.layer', {opacity:0, scale:.96, duration:1, stagger:.04, ease:'power3.out'});
+    autoEnableGyro();
   </script>
 </body>
 </html>
