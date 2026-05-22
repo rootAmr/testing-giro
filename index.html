@@ -3,17 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GSAP Parallax Hero</title>
+  <title>Vindes Style Parallax</title>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #202529;
+      background: #20252a;
       font-family: Arial, sans-serif;
       overflow-x: hidden;
     }
@@ -21,267 +17,279 @@
     .hero {
       position: relative;
       height: 100vh;
+      min-height: 640px;
       overflow: hidden;
-      background: #e9007f;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle, transparent 35%, rgba(0,0,0,.25) 36%),
-        linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.15));
-      background-size: 4px 4px, 100% 100%;
-      mix-blend-mode: multiply;
-      pointer-events: none;
-      z-index: 20;
+      background: #e92a8b;
+      touch-action: none;
     }
 
     .nav {
       position: absolute;
-      top: 24px;
-      left: 40px;
-      right: 40px;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 74px;
       z-index: 50;
+      background: #000;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      color: white;
-      font-weight: 900;
+      justify-content: space-between;
+      padding: 0 42px;
+      color: #fff;
     }
 
-    .logo-small {
+    .brand {
       font-size: 28px;
-      text-shadow: 4px 4px 0 #000;
+      font-weight: 1000;
+      text-shadow: 3px 3px 0 #e92a8b;
     }
 
     .social {
       display: flex;
-      gap: 18px;
+      gap: 30px;
+      font-weight: 900;
     }
 
-    .social span {
-      width: 38px;
-      height: 38px;
-      display: grid;
-      place-items: center;
-      background: #000;
-      border-radius: 50%;
-      font-size: 14px;
+    .scene {
+      position: absolute;
+      inset: 74px 0 0;
+      overflow: hidden;
+    }
+
+    .scene::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 40;
+      pointer-events: none;
+      background:
+        radial-gradient(circle, rgba(0,0,0,.2) 1px, transparent 1.5px),
+        linear-gradient(rgba(233,42,139,.42), rgba(233,42,139,.42));
+      background-size: 4px 4px, 100% 100%;
+      mix-blend-mode: multiply;
     }
 
     .layer {
       position: absolute;
-      inset: 0;
-      width: 110%;
-      height: 110%;
-      object-fit: cover;
-      left: -5%;
-      top: -5%;
       will-change: transform;
-      pointer-events: none;
       user-select: none;
+      pointer-events: none;
     }
 
-    .bg {
+    .bg-collage {
+      inset: -8%;
+      z-index: 1;
       background:
         url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1600&auto=format&fit=crop") center/cover;
-      filter: grayscale(1) contrast(1.4);
-      opacity: .5;
-      mix-blend-mode: multiply;
-      z-index: 1;
+      filter: grayscale(1) contrast(1.35);
+      opacity: .85;
     }
 
-    .shape {
-      position: absolute;
+    .sticker {
       background: #111;
-      color: #ff4ab3;
-      border: 8px solid #ff4ab3;
-      box-shadow: 10px 10px 0 #111;
-      font-weight: 900;
+      color: #f04ca0;
+      border: 8px solid #111;
+      box-shadow: 0 0 0 4px #f04ca0;
+      font-weight: 1000;
       text-transform: uppercase;
-      z-index: 5;
+      line-height: .9;
+      text-align: center;
     }
 
-    .shape-1 {
-      left: 10%;
-      top: 22%;
-      font-size: 70px;
-      padding: 10px 30px;
-      transform: rotate(-6deg);
-      border-radius: 18px;
+    .jasiman {
+      left: 13%;
+      top: 12%;
+      z-index: 12;
+      font-size: clamp(48px, 8vw, 105px);
+      padding: 14px 24px;
+      transform: rotate(-8deg);
+      text-shadow: 4px 4px 0 #000;
     }
 
-    .shape-2 {
+    .ngapain {
       right: 12%;
-      top: 18%;
-      font-size: 34px;
-      padding: 22px;
-      width: 250px;
-      height: 210px;
+      top: 12%;
+      z-index: 13;
+      width: 230px;
+      height: 190px;
       display: grid;
       place-items: center;
-      text-align: center;
+      font-size: 34px;
       transform: rotate(8deg);
     }
 
     .person {
-      position: absolute;
-      width: 230px;
-      height: 420px;
-      background: #080808;
-      border-radius: 45% 45% 8% 8%;
-      z-index: 7;
+      width: 210px;
+      height: 370px;
+      border-radius: 48% 48% 12% 12%;
+      background: #070707;
+      z-index: 10;
       opacity: .9;
-      box-shadow: inset 0 0 0 8px rgba(255,255,255,.08);
+      box-shadow: inset 0 0 0 10px rgba(255,255,255,.08);
     }
 
     .person::before {
       content: "";
       position: absolute;
+      top: -50px;
+      left: 50%;
       width: 95px;
       height: 95px;
-      border-radius: 50%;
-      background: #111;
-      top: -48px;
-      left: 50%;
       transform: translateX(-50%);
-      border: 8px solid #ff4ab3;
+      border-radius: 50%;
+      background: #090909;
+      box-shadow: 0 0 0 8px #f04ca0;
     }
 
-    .p1 { left: 6%; bottom: 8%; }
-    .p2 { left: 42%; top: 6%; }
-    .p3 { right: 7%; bottom: 2%; }
+    .p1 { left: 5%; bottom: 16%; transform: rotate(-15deg); }
+    .p2 { left: 38%; top: 0; transform: rotate(8deg); }
+    .p3 { right: 5%; bottom: 4%; transform: rotate(15deg); }
 
-    .center-logo {
+    .logo-main {
       position: absolute;
-      z-index: 30;
       inset: 0;
+      z-index: 30;
       display: grid;
       place-items: center;
-      color: white;
-      font-size: clamp(56px, 10vw, 150px);
+      color: #fff;
+      font-size: clamp(64px, 12vw, 150px);
       font-weight: 1000;
       letter-spacing: -8px;
-      text-shadow: 10px 10px 0 rgba(0,0,0,.65);
+      text-shadow: 8px 8px 0 rgba(0,0,0,.45);
+    }
+
+    .logo-mark {
+      display: inline-block;
+      width: .8em;
+      height: .55em;
+      background: #fff;
+      border-radius: 70% 10% 10% 10%;
+      margin-right: .12em;
+      transform: skewX(-16deg);
+    }
+
+    .noise-bottom {
+      left: -5%;
+      bottom: -10%;
+      width: 110%;
+      height: 32%;
+      z-index: 18;
+      background: #111;
+      clip-path: polygon(0 40%, 12% 35%, 22% 52%, 35% 30%, 48% 48%, 60% 32%, 76% 55%, 89% 36%, 100% 45%, 100% 100%, 0 100%);
+      opacity: .95;
+    }
+
+    .gyro-btn {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      z-index: 999;
+      display: none;
+      border: 0;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: #fff;
+      color: #111;
+      font-weight: 1000;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
     }
 
     .program {
-      min-height: 60vh;
-      padding: 90px 8%;
+      min-height: 80vh;
+      background: #20252a;
+      padding: 90px 7%;
       color: white;
-      background: #202529;
     }
 
     .program h2 {
-      display: inline-block;
-      font-size: 76px;
+      font-size: clamp(54px, 8vw, 92px);
       font-weight: 1000;
-      text-shadow:
-        5px 5px 0 #000,
-        -3px -3px 0 #000;
+      text-shadow: 6px 6px 0 #000;
       margin-bottom: 40px;
     }
 
     .cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 26px;
     }
 
     .card {
-      height: 210px;
-      background: #333;
-      border-radius: 18px;
-      overflow: hidden;
+      height: 230px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #333, #111);
       position: relative;
+      overflow: hidden;
     }
 
     .card::after {
       content: "Program";
       position: absolute;
       left: 20px;
-      bottom: 18px;
+      bottom: 20px;
       font-size: 28px;
       font-weight: 900;
-      text-shadow: 3px 3px 0 #000;
+      text-shadow: 4px 4px 0 #000;
     }
 
     @media (max-width: 768px) {
-      .nav {
-        left: 20px;
-        right: 20px;
-      }
+      .hero { min-height: 580px; }
+      .nav { padding: 0 22px; height: 64px; }
+      .brand { font-size: 22px; }
+      .social { gap: 14px; font-size: 13px; }
+      .scene { inset: 64px 0 0; }
 
-      .logo-small {
-        font-size: 22px;
-      }
+      .jasiman { left: 8%; top: 14%; }
+      .ngapain { right: 5%; width: 160px; height: 140px; font-size: 24px; }
 
-      .social {
-        gap: 8px;
-      }
+      .person { width: 140px; height: 260px; }
+      .p1 { left: -4%; bottom: 20%; }
+      .p2 { left: 38%; top: 4%; }
+      .p3 { right: -5%; bottom: 8%; }
 
-      .social span {
-        width: 32px;
-        height: 32px;
-        font-size: 11px;
-      }
-
-      .shape-1 {
-        font-size: 42px;
-        left: 5%;
-      }
-
-      .shape-2 {
-        width: 190px;
-        height: 150px;
-        font-size: 24px;
-        right: 5%;
-      }
-
-      .person {
-        width: 150px;
-        height: 300px;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
+      .logo-main { letter-spacing: -4px; }
+      .gyro-btn { display: block; }
+      .cards { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
 
+  <button class="gyro-btn" id="gyroBtn">Aktifkan Gyro</button>
+
   <section class="hero" id="hero">
-    <div class="nav">
-      <div class="logo-small">▲ VINDES.</div>
+    <nav class="nav">
+      <div class="brand">△VINDES.</div>
       <div class="social">
         <span>X</span>
-        <span>T</span>
+        <span>TT</span>
         <span>IG</span>
         <span>YT</span>
       </div>
-    </div>
+    </nav>
 
-    <div class="layer bg parallax-item" data-depth="10"></div>
+    <div class="scene" id="scene">
+      <div class="layer bg-collage parallax" data-depth="10"></div>
 
-    <div class="shape shape-1 parallax-item" data-depth="35">JASIMAN</div>
-    <div class="shape shape-2 parallax-item" data-depth="45">NGAPAIN<br>BANG?</div>
+      <div class="layer sticker jasiman parallax" data-depth="42">JASIMAN</div>
+      <div class="layer sticker ngapain parallax" data-depth="58">NGAPAIN<br>BANG?</div>
 
-    <div class="person p1 parallax-item" data-depth="20"></div>
-    <div class="person p2 parallax-item" data-depth="55"></div>
-    <div class="person p3 parallax-item" data-depth="30"></div>
+      <div class="layer person p1 parallax" data-depth="30"></div>
+      <div class="layer person p2 parallax" data-depth="46"></div>
+      <div class="layer person p3 parallax" data-depth="38"></div>
 
-    <div class="center-logo parallax-item" data-depth="12">
-      VINDES.
+      <div class="layer noise-bottom parallax" data-depth="24"></div>
+
+      <div class="logo-main parallax" data-depth="16">
+        <div><span class="logo-mark"></span>VINDES.</div>
+      </div>
     </div>
   </section>
 
   <section class="program">
     <h2>Program</h2>
-
     <div class="cards">
       <div class="card"></div>
       <div class="card"></div>
@@ -292,76 +300,118 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 
   <script>
-    const hero = document.querySelector("#hero");
-    const items = document.querySelectorAll(".parallax-item");
+    const scene = document.querySelector("#scene");
+    const items = document.querySelectorAll(".parallax");
+    const gyroBtn = document.querySelector("#gyroBtn");
 
-    let targetX = 0;
-    let targetY = 0;
-    let isPointerActive = false;
+    let pointerActive = false;
+    let gyroActive = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
 
     function moveLayers(x, y) {
+      lastX += (x - lastX) * 0.12;
+      lastY += (y - lastY) * 0.12;
+
       items.forEach((item) => {
         const depth = Number(item.dataset.depth || 20);
 
         gsap.to(item, {
-          x: x * depth,
-          y: y * depth,
-          rotation: x * depth * 0.08,
-          duration: 0.9,
-          ease: "power3.out"
+          x: lastX * depth,
+          y: lastY * depth,
+          rotation: lastX * depth * 0.055,
+          duration: 0.45,
+          ease: "power3.out",
+          overwrite: "auto"
         });
       });
     }
 
-    hero.addEventListener("mousemove", (e) => {
-      isPointerActive = true;
+    scene.addEventListener("mousemove", (e) => {
+      pointerActive = true;
 
-      const rect = hero.getBoundingClientRect();
+      const rect = scene.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
 
-      targetX = (e.clientX - rect.left) / rect.width - 0.5;
-      targetY = (e.clientY - rect.top) / rect.height - 0.5;
-
-      moveLayers(targetX, targetY);
+      moveLayers(x, y);
     });
 
-    hero.addEventListener("touchmove", (e) => {
-      isPointerActive = true;
+    scene.addEventListener("mouseleave", () => {
+      pointerActive = false;
+    });
+
+    scene.addEventListener("touchmove", (e) => {
+      pointerActive = true;
 
       const touch = e.touches[0];
-      const rect = hero.getBoundingClientRect();
+      const rect = scene.getBoundingClientRect();
+      const x = ((touch.clientX - rect.left) / rect.width - 0.5) * 2;
+      const y = ((touch.clientY - rect.top) / rect.height - 0.5) * 2;
 
-      targetX = (touch.clientX - rect.left) / rect.width - 0.5;
-      targetY = (touch.clientY - rect.top) / rect.height - 0.5;
+      moveLayers(x, y);
+    }, { passive: true });
 
-      moveLayers(targetX, targetY);
-    });
+    function handleGyro(event) {
+      if (!gyroActive) return;
 
-    hero.addEventListener("mouseleave", () => {
-      isPointerActive = false;
+      const gamma = event.gamma || 0;
+      const beta = event.beta || 0;
+
+      const x = clamp(gamma / 28, -1, 1);
+      const y = clamp((beta - 35) / 35, -1, 1);
+
+      moveLayers(x, y);
+    }
+
+    function startGyro() {
+      gyroActive = true;
+      pointerActive = false;
+      window.addEventListener("deviceorientation", handleGyro, true);
+      gyroBtn.style.display = "none";
+    }
+
+    gyroBtn.addEventListener("click", async () => {
+      try {
+        if (
+          typeof DeviceOrientationEvent !== "undefined" &&
+          typeof DeviceOrientationEvent.requestPermission === "function"
+        ) {
+          const permission = await DeviceOrientationEvent.requestPermission();
+          if (permission === "granted") startGyro();
+        } else {
+          startGyro();
+        }
+      } catch (err) {
+        alert("Gyro tidak bisa diaktifkan di browser ini.");
+      }
     });
 
     gsap.ticker.add(() => {
-      if (isPointerActive) return;
+      if (pointerActive || gyroActive) return;
 
       const t = Date.now() * 0.001;
+      const x = Math.sin(t * 0.8) * 0.35;
+      const y = Math.cos(t * 0.6) * 0.22;
 
-      const autoX = Math.sin(t * 0.8) * 0.22;
-      const autoY = Math.cos(t * 0.6) * 0.16;
-
-      moveLayers(autoX, autoY);
+      moveLayers(x, y);
     });
 
-    gsap.from(".center-logo", {
-      scale: 0.7,
+    gsap.from(".logo-main", {
+      scale: 0.72,
       opacity: 0,
       duration: 1,
       ease: "back.out(1.7)"
     });
 
-    gsap.from(".shape, .person", {
-      y: 80,
+    gsap.from(".sticker, .person, .noise-bottom", {
+      y: 90,
       opacity: 0,
-      stagger: 0.12,
+      stagger: 0.08,
       duration: 1,
       ease: "power4.out"
     });
